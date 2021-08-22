@@ -38,9 +38,11 @@ class LoginController extends Controller
     public function register(RegisterRequest $request)
     {
         $data = $request->validated();
+        $data['password'] = bcrypt($data['password']);
         try {
             $user = User::create($data);
-            return $this->responseData($user);
+            $response = ['user' => $user];
+            return $this->responseData($response);
         } catch (\Exception $e) {
             return $this->responseError($e->getMessage());
         }

@@ -28,7 +28,7 @@ class CepController extends Controller
         try {
             $ceps = DB::table('ceps', 'cep')->select('cep.id', 'cep.cep', 'city.name as city')
                 ->join('cities as city', 'cep.city_id', '=', 'city.id')
-                ->paginate(10);
+                ->paginate(5);
             return $this->responseData($ceps);
         } catch (\Exception $e) {
             return $this->responseError($e->getMessage());
