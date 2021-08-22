@@ -26,12 +26,17 @@ Route::get('teste', function () {
 Route::post('login', [LoginController::class, 'login']);
 Route::post('register', [LoginController::class, 'register']);
 
-Route::group(['prefix' => 'cities', 'as' => 'cities.'], function () {
-    Route::get('', [CityController::class, 'index'])->name('index');
-    Route::post('', [CityController::class, 'insert'])->name('insert');
+Route::group(['middleware' => 'auth:api'], function () {
+    Route::group(['prefix' => 'cities', 'as' => 'cities.'], function () {
+        Route::get('', [CityController::class, 'index'])->name('index');
+        Route::post('', [CityController::class, 'insert'])->name('insert');
+    });
+
+    Route::group(['prefix' => 'ceps', 'as' => 'ceps.'], function () {
+        Route::get('', [CepController::class, 'index'])->name('index');
+        Route::post('', [CepController::class, 'insert'])->name('insert');
+
+        Route::delete('/{id}', [CepController::class, 'destroy'])->name('destroy');
+    });
 });
 
-Route::group(['prefix' => 'ceps', 'as' => 'ceps.'], function () {
-    Route::get('', [CepController::class, 'index'])->name('index');
-    Route::post('', [CepController::class, 'insert'])->name('insert');
-});

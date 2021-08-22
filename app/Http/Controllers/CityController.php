@@ -5,6 +5,7 @@ namespace App\Http\Controllers;
 use App\Http\Requests\CityRequest;
 use App\Models\Cep;
 use App\Models\City;
+use App\Services\CityServices;
 use Illuminate\Http\Request;
 use Symfony\Component\HttpFoundation\Response;
 
@@ -22,7 +23,7 @@ class CityController extends Controller
     public function index()
     {
         try {
-            $cities = $this->city->paginate(10);
+            $cities = $this->city->get();
             return $this->responseData($cities);
         } catch (\Exception $e) {
             return $this->responseError($e->getMessage());
@@ -34,11 +35,11 @@ class CityController extends Controller
      * @param CityRequest $request
      * @return \Illuminate\Http\JsonResponse
      */
-    public function insert(CityRequest $request)
+    public function insert(CityRequest $request, CityServices $cityServices)
     {
         try {
             $data = $request->validated();
-            $city = $this->city->create($data);
+            $city = $cityServices->storeCity($data['name']);
             return $this->responseData($city,Response::HTTP_CREATED);
 
         } catch (\Exception $e) {

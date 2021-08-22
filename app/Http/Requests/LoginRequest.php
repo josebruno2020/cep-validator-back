@@ -4,7 +4,7 @@ namespace App\Http\Requests;
 
 use Illuminate\Foundation\Http\FormRequest;
 
-class CepRequest extends FormRequest
+class LoginRequest extends FormRequest
 {
     /**
      * Determine if the user is authorized to make this request.
@@ -24,9 +24,8 @@ class CepRequest extends FormRequest
     public function rules()
     {
         return [
-            'cep' => 'required',
-            'city' => 'required_if:city_id,null|max:100',
-            'city_id' => 'required_if:city,null'
+            'email' => 'required|email',
+            'password' => 'required'
         ];
     }
 }

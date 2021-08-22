@@ -13,13 +13,14 @@ class Controller extends BaseController
 
     protected $city;
     protected $cep;
+    protected $user;
     protected function responseData($data, $status=200)
     {
         return response()->json($data, $status);
     }
 
-    protected function responseError($errorMessage)
+    protected function responseError($errorMessage, $status=500)
     {
-        return response()->json(['error' => $errorMessage]);
+        return response()->json(['error' => $errorMessage], $status);
     }
 }
