@@ -1,4 +1,4 @@
-#Sobre o projeto
+# Sobre o projeto
 
 Back-end e api para o sistemas de Correios de Ghotam City. Feito em laravel, em sua versão 8.
 
@@ -6,7 +6,7 @@ Versão do PHP utilizada: 7.4.20 (recomendo ter a mesma versão para a instalaç
 
 Versão do composer: 2.1.5 (recomendo a versão > 2 para a instalação dos pacotes)
 
-#Instalação
+# Instalação
 
 1. Clone o repositório
 2. Configure seu .env Cpode copiar do .env.example). Lembre de ter um banco de dados mysql em sua máquina chamado cep_trade, para que assim consiga rodar as migrations;
